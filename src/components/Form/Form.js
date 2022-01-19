@@ -1,38 +1,68 @@
-// import React from 'react';
-// // import ReactDOM from 'react-dom';
-// // import { Formik, Field, Form } from 'formik';
+import { nanoid } from 'nanoid';
+import React, { Component } from 'react';
+import s from '../../App.module.css';
 
-// const Basic = () => (
-//   <div>
-//     <h1>Sign Up</h1>
-//     <Formik
-//       initialValues={{
-//         firstName: '',
-//         lastName: '',
-//         email: '',
-//       }}
-//       onSubmit={async (values) => {
-//         await new Promise((r) => setTimeout(r, 500));
-//         alert(JSON.stringify(values, null, 2));
-//       }}
-//     >
-//       <Form>
-//         <label htmlFor="firstName">First Name</label>
-//         <Field id="firstName" name="firstName" placeholder="Jane" />
+class Form extends Component {
+  state = {
+    name: '',
+    number: '',
+  };
+  nameInputId = nanoid();
+  numberInputId = nanoid();
+  handleInputChange = event => {
+    const { name, value } = event.currentTarget;
+    this.setState({
+      [name]: value,
+    });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    // const contact = e.currentTarget.value;
+    // this.setState(prev => ({
+    //   contacts: [...prev.contacts, { ...contact, id: this.nameInputId }],
+    // }));
 
-//         <label htmlFor="lastName">Last Name</label>
-//         <Field id="lastName" name="lastName" placeholder="Doe" />
-
-//         <label htmlFor="email">Email</label>
-//         <Field
-//           id="email"
-//           name="email"
-//           placeholder="jane@acme.com"
-//           type="email"
-//         />
-//         <button type="submit">Submit</button>
-//       </Form>
-//     </Formik>
-//   </div>
-// );
-// export default
+    this.props.onSubmit(this.state);
+    this.reset();
+  };
+  reset = () => {
+    this.setState({ name: '', number: '' });
+  };
+  render() {
+    return (
+      <form className={s.form} onSubmit={this.handleSubmit}>
+        <h2>Phonebook</h2>
+        <label className={s.label} htmlFor={this.nameInputId}>
+          Name
+        </label>
+        <input
+          type="text"
+          name="name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          value={this.state.name}
+          onChange={this.handleInputChange}
+          id={this.nameInputId}
+          required
+        />
+        <label className={s.label} htmlFor={this.numberInputId}>
+          Number
+        </label>
+        <input
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          value={this.state.number}
+          onChange={this.handleInputChange}
+          id={this.numberInputId}
+          required
+        />
+        <button className={s.button} type="submit">
+          Add contact
+        </button>
+      </form>
+    );
+  }
+}
+export default Form;
