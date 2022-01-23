@@ -38,6 +38,7 @@ class Form extends Component {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           value={this.state.name}
           onChange={this.handleInputChange}
+          placeholder="Enter contact name"
           id={this.nameInputId}
           required
         />
@@ -51,6 +52,7 @@ class Form extends Component {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           value={this.state.number}
           onChange={this.handleInputChange}
+          placeholder="Enter contact phone number"
           id={this.numberInputId}
           required
         />
