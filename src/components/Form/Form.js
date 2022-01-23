@@ -17,10 +17,6 @@ class Form extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    // const contact = e.currentTarget.value;
-    // this.setState(prev => ({
-    //   contacts: [...prev.contacts, { ...contact, id: this.nameInputId }],
-    // }));
 
     this.props.onSubmit(this.state);
     this.reset();
