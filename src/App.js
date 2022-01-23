@@ -42,7 +42,6 @@ class App extends Component {
   };
   render() {
     const contacts = contactFilter(this.state.contacts, this.state.filter);
-    // const contactsL = this.state.contacts;
     return (
       <div className={s.container}>
         <div>
