@@ -33,11 +33,9 @@ class App extends Component {
     });
     console.log(event.currentTarget.name);
   };
-  handleDeleteContact = event => {
+  handleDeleteContact = id => {
     this.setState({
-      contacts: this.state.contacts.filter(
-        contact => contact.id !== event.target.id,
-      ),
+      contacts: this.state.contacts.filter(contact => contact.id !== id),
     });
   };
   render() {
